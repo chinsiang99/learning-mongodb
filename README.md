@@ -52,3 +52,18 @@ In MongoDB, a collection is a grouping of MongoDB documents. It's analogous to a
 6. Operations:
 
 - Common operations on collections include inserting documents (insertOne, insertMany), querying documents (find, findOne), updating documents (updateOne, updateMany), and deleting documents (deleteOne, deleteMany).
+
+# Querying in Mongodb
+
+## limiting
+> db.recipes.find().count()
+> db.recipes.find({}, {"title": 1}).limit(2)
+
+## sorting
+note that 1 meaning ascending, -1 meaning dscending
+> db.recipes.find({}, {"title": 1}).sort({"title": 1})
+> db.recipes.find({}, {"title": 1}).sort({"title": -1})
+
+## skipping
+skip is equivalent to offset
+> db.recipes.find({}, {"title": 1}).skip(1)
