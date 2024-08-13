@@ -95,3 +95,7 @@ examples:
 > db.examples.findOne({"title": "Tacos"})
 > db.examples.updateOne({"title": "Tacos"}, {$push: {"likes": 60}})
 > db.examples.updateOne({"title": "Tacos"}, {$pull: {"likes": 60}})
+
+## deleting documents
+> db.examples.find({}, {"title": 1})
+> db.examples.deleteOne({"_id": ObjectId("5ee69e393260aab97ea0d58e")})
