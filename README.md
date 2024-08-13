@@ -79,3 +79,19 @@ examples:
 > db.recipes.find({"cook_time": {$lte: 30}}, {"title": 1})
 > db.recipes.find({$or: [{"lte: 30"}, {"prep_time": {$lte: 10}}]}, {"title": 1})
 > db.recipes.find({$or: [{"lte: 30"}, {"prep_time": {$lte: 10}}]}, {"title": 1})
+
+## Updating documents
+> db.examples.find({}, {"title": 1})
+> db.examples.updateOne({"title": "Pizza"}, {$set: {"title": "Thin crust pizza"}})
+> db.examples.updateOne({"title": "Thin crust pizza"}, {$set: {"vegan": false}})
+> db.examples.updateOne({"title": "Thin crust pizza"}, {$unset: {"vegan": 1}})
+
+### increment operator
+> db.examples.findOne({"title": "Tacos"})
+> db.examples.updateOne({"title": "Tacos"}, {$inc: {"likes_count": 2}})
+> db.examples.updateOne({"title": "Tacos"}, {$inc: {"likes_count": -2}})
+
+## Updating arrays
+> db.examples.findOne({"title": "Tacos"})
+> db.examples.updateOne({"title": "Tacos"}, {$push: {"likes": 60}})
+> db.examples.updateOne({"title": "Tacos"}, {$pull: {"likes": 60}})
