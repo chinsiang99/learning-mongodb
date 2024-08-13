@@ -67,3 +67,15 @@ note that 1 meaning ascending, -1 meaning dscending
 ## skipping
 skip is equivalent to offset
 > db.recipes.find({}, {"title": 1}).skip(1)
+
+## Comparison Operators
+
+1. $gt - greater than
+2. $lt - lesser than
+3. $lte - lesser than equal
+4. $or - or operator
+
+examples:
+> db.recipes.find({"cook_time": {$lte: 30}}, {"title": 1})
+> db.recipes.find({$or: [{"lte: 30"}, {"prep_time": {$lte: 10}}]}, {"title": 1})
+> db.recipes.find({$or: [{"lte: 30"}, {"prep_time": {$lte: 10}}]}, {"title": 1})
