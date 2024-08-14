@@ -118,3 +118,27 @@ to create index, we can use following commands, we can have different types of i
 to delete index, we can use the following commands
 > db.recipes.dropIndex("title_1")
 
+## Using Different collection types
+
+### How GridFS works
+
+GridFS (Grid File System) is a specification for storing and retrieving large files, such as images, videos, and other binary data, in MongoDB. Since MongoDB's BSON document size is limited to 16 MB, GridFS is used to store files that exceed this size limit by splitting the file into smaller chunks and storing each chunk as a separate document.
+
+#### How GridFS Works:
+- Chunks: The file is divided into chunks (default size: 255 KB) and each chunk is stored in a separate document within a chunks collection.
+- Metadata: Metadata about the file, including its filename, size, and the order of chunks, is stored in a files collection.
+- Retrieval: When retrieving the file, GridFS reassembles the chunks in the correct order to reconstruct the original file.
+
+#### When to Use GridFS:
+- Large Files: If you need to store files larger than 16 MB.
+Streaming: For streaming video or audio files where you need to access data in chunks rather than loading the entire file into memory.
+- Partial Retrieval: If you need to retrieve specific portions of a file without loading the entire file into memory.
+
+#### GridFS Collections:
+- fs.files: Contains metadata about each file, such as the filename, length, and upload date.
+- fs.chunks: Contains the file's chunks, each associated with a files_id that ties it back to its corresponding document in fs.files.
+
+#### Use Cases:
+Storing large media files, backups, or any other large binary data.
+Applications that require efficient storage and retrieval of large amounts of data without exceeding MongoDB's document size limit.
+GridFS is typically used with MongoDB drivers, which provide built-in methods for storing and retrieving files using GridFS.
