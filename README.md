@@ -99,3 +99,22 @@ examples:
 ## deleting documents
 > db.examples.find({}, {"title": 1})
 > db.examples.deleteOne({"_id": ObjectId("5ee69e393260aab97ea0d58e")})
+
+# Data and Schema Modeling (Strategies for data modeling)
+- Quote from MongoDB, "Data that is accessed together should be stored together"
+
+## Basic Index
+> db.recipes.find({"cook_time": 30}, {"title": 1}).explain("executionStats")
+> db.recipes.find({"title": "Tacos"}, {"title": 1}).explain("executionStats")
+
+note that title has index, so the totaldocsexamined will be very low
+
+in order to show what indexes, we can use following command:
+> db.recipes.getIndexes()
+
+to create index, we can use following commands, we can have different types of indexes, such as compound indexes, geospatial indexes and etc: (note here if it is 1, it means ascending, if it is -1, it means descending)
+> db.recipes.createIndex({"title": 1})
+
+to delete index, we can use the following commands
+> db.recipes.dropIndex("title_1")
+
