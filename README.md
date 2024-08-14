@@ -129,6 +129,10 @@ GridFS (Grid File System) is a specification for storing and retrieving large fi
 - Metadata: Metadata about the file, including its filename, size, and the order of chunks, is stored in a files collection.
 - Retrieval: When retrieving the file, GridFS reassembles the chunks in the correct order to reconstruct the original file.
 
+<div align="center">
+  <img src="./gridfs.png.png" alt="how gridfs works" />
+</div>
+
 #### When to Use GridFS:
 - Large Files: If you need to store files larger than 16 MB.
 Streaming: For streaming video or audio files where you need to access data in chunks rather than loading the entire file into memory.
@@ -142,3 +146,25 @@ Streaming: For streaming video or audio files where you need to access data in c
 Storing large media files, backups, or any other large binary data.
 Applications that require efficient storage and retrieval of large amounts of data without exceeding MongoDB's document size limit.
 GridFS is typically used with MongoDB drivers, which provide built-in methods for storing and retrieving files using GridFS.
+
+### There are two types of other collections:
+1. capped collections
+2. time series collections
+
+#### Capped Collections
+- it ensures insertion order
+- it is limited by disk size or document count
+- it provides automatic deletion:
+    1. first-in first-out
+    2. based off guaranteed order
+
+#### Example of Creating a Capped Collection:
+> db.createCollection("logCollection", { capped: true, size: 5242880, max: 5000 })
+
+1. capped: true: Specifies that this is a capped collection.
+2. size: 5242880: Sets the maximum size of the collection in bytes (here, 5 MB).
+3. max: 5000: Optionally limits the number of documents in the collection (in this case, to 5000 documents).
+
+#### Limitations of capped collections
+- no index by default (note if you need to update document often)
+- can't shard a capped collection
